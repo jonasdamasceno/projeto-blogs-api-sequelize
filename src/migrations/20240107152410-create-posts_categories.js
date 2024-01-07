@@ -7,7 +7,7 @@ module.exports = {
       post_id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         references: {
           model: 'blog_posts',
           key: 'id'
@@ -17,7 +17,7 @@ module.exports = {
       category_id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTERGER,
+        type: Sequelize.INTEGER,
         references: {
           key: 'id',
           model: 'categories',
