@@ -16,4 +16,4 @@ const createUserController = async (req, res) => {
   }
 };
 
-module.exports = createUserController;
+module.exports = { createUserController };

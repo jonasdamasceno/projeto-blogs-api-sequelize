@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const loginController = require('../controller/login.controller');
+const { loginController } = require('../controller');
 const checkLoginFields = require('../middlewares/validateLogin');
 
 router.post('/', checkLoginFields, loginController);
