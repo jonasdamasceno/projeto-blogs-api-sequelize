@@ -20,7 +20,7 @@
 
 // module.exports = checkUserFields;
 
-const findEmail = require('../service/login.service');
+const { loginService } = require('../service');
 
 const isDisplayNameValid = (displayName) => (displayName.length < 8);
 const isPasswordValid = (password) => (password.length < 6);
@@ -46,7 +46,7 @@ const checkUserFields = async (req, res, next) => {
     return res.status(400).json({ message: '"email" must be a valid email' });
   }
 
-  const user = await findEmail(email);
+  const user = await loginService.findEmail(email);
   if (user) {
     return res.status(409).json({ message: 'User already registered' });
   }
