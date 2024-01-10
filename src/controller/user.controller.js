@@ -28,7 +28,7 @@ const getUsersContreller = async (_req, res) => {
 };
 
 const findUserByIdController = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const { status, data } = await userService.findUserById(id);
   return res.status(status).json(data);
 };
