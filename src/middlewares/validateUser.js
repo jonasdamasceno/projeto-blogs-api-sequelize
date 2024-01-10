@@ -55,38 +55,3 @@ const checkUserFields = async (req, res, next) => {
 };
 
 module.exports = checkUserFields;
-// const findEmail = require('../service/login.service');
-
-// const isDisplayNameValid = (displayName) => displayName.length >= 8;
-// const isPasswordValid = (password) => password.length >= 6;
-// const isEmailValid = (email) => {
-//   const EMAIL_REGEX = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
-//   return EMAIL_REGEX.test(email);
-// };
-
-// const checkUserFields = async (req, res, next) => {
-//   const { displayName, email, password } = req.body;
-
-//   if (!isDisplayNameValid(displayName)) {
-//     return res.status(400)
-//       .json({ mensagem: '"displayName" length must be at least 8 characters long' });
-//   }
-
-//   if (!isPasswordValid(password)) {
-//     return res.status(400)
-//       .json({ mensagem: '"password" length must be at least 6 characters long' });
-//   }
-
-//   if (!isEmailValid(email)) {
-//     return res.status(400).json({ mensagem: '"email" must be a valid email' });
-//   }
-
-//   const user = await findEmail(email);
-//   if (user) {
-//     return res.status(409).json({ mensagem: 'User already registered' });
-//   }
-
-//   next();
-// };
-
-// module.exports = checkUserFields;
