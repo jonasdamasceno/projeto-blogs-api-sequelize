@@ -8,4 +8,6 @@ const findAllUsers = async () => {
   return users;
 };
 
-module.exports = { createUser, findAllUsers };
+const findUserById = (id) => User.findOne({ where: { id }, attributes: { exclude: 'password' } });
+
+module.exports = { createUser, findAllUsers, findUserById };
