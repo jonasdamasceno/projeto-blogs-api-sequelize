@@ -22,7 +22,7 @@
 
 const { loginService } = require('../service');
 
-const isDisplayNameValid = (displayName) => (displayName.length < 8);
+const isDisplayNameValid = (displayName) => (!displayName || displayName.length < 8);
 const isPasswordValid = (password) => (password.length < 6);
 const isEmailValid = (email) => {
   const EMAIL_REGEX = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/;

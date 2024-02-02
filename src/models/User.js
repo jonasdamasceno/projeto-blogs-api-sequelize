@@ -8,7 +8,7 @@ id: {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      displayName: { type: DataTypes.STRING, field: "display_name" },
+      displayName:{type: DataTypes.STRING, field: "display_name" },
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       image: DataTypes.STRING
