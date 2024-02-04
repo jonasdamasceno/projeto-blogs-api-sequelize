@@ -7,6 +7,7 @@ module.exports = {
       postId: {
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
         type: Sequelize.INTEGER,
         field: "post_id",
         references: {
@@ -15,10 +16,11 @@ module.exports = {
         },
         onDelete: 'CASCADE',
       },
-      category_id: {
+      categoryId: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
+        field: "category_id",
         references: {
           key: 'id',
           model: 'categories',
