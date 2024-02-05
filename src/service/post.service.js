@@ -53,4 +53,6 @@ const findPostByIdWithDetails = async (id) => BlogPost.findOne({
     { model: Category, as: 'categories', through: { attributes: [] } },
   ],
 }); 
-module.exports = { addPost, fetchPosts, findPostByIdWithDetails };
+const updatePost = (id, title, content) => BlogPost.update({ title, content }, { where: { id } });
+
+module.exports = { addPost, fetchPosts, findPostByIdWithDetails, updatePost };

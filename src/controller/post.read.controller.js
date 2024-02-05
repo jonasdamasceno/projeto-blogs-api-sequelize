@@ -1,36 +1,27 @@
-const { postReadService } = require('../service');
+const getUserFromToken = require('../util/getUserToken');
+const { postService } = require('../service');
 
-const getPosts = async (_req, res) => {
-  try {
-    const { status, data } = await postReadService.getPosts();
-    return res.status(status).json(data);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-const getPostById = async (req, res) => {
+const updatePostById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status, data } = await postReadService.getPostById(id);
-    return res.status(status).json(data);
+    const { authorization } = req.headers;
+    const { title, content } = req.body;
+    const userId = await getUserFromToken(authorization);
+    const post = await postService.findPostByIdWithDetails(id);
+
+    if (userId !== post.user.id) {
+      return res.status(401).json({ message: 'Unauthorized user' });
+    }
+
+    await postService.updatePost(id, title, content);
+
+    const updatedPost = await postService.findPostByIdWithDetails(id);
+
+    return res.status(200).json(updatedPost);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
 
-const searchPosts = async (req, res) => {
-  try {
-    const { q } = req.query;
-    const { status, data } = await postReadService.searchPosts(q);
-    return res.status(status).json(data);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-module.exports = {
-  getPosts,
-  getPostById,
-  searchPosts,
-};
+module.exports = { updatePostById };

@@ -1,4 +1,4 @@
-const validatePost = async (req, res, next) => {
+const validatePostUpdate = async (req, res, next) => {
   const { title, content } = req.body;
   
   if (!title || !content) {
@@ -8,4 +8,4 @@ const validatePost = async (req, res, next) => {
   next();
 };
 
-module.exports = validatePost;
+module.exports = validatePostUpdate;
