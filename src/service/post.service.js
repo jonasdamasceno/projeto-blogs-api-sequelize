@@ -46,7 +46,11 @@ const fetchPosts = () => {
   return posts;
 };
 
-module.exports = {
-  addPost,
-  fetchPosts,
-};
+const findPostByIdWithDetails = async (id) => BlogPost.findOne({
+  where: { id }, 
+  include: [
+    { model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+  ],
+}); 
+module.exports = { addPost, fetchPosts, findPostByIdWithDetails };
