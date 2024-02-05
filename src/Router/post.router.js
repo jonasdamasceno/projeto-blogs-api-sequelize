@@ -5,6 +5,7 @@ const { postController, postReadController } = require('../controller');
 const { fetchPostById } = require('../controller/post.controller');
 const validatePostUpdate = require('../middlewares/validateUpdate');
 
+route.delete('/:id', validateToken, postReadController.deletePost);
 route.put('/:id', validateToken, validatePostUpdate, postReadController.updatePostById);
 route.get('/:id', validateToken, fetchPostById);
 route.post('/', validateToken, validatePost, postController.addPost);

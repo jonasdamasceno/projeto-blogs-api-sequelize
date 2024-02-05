@@ -54,5 +54,5 @@ const findPostByIdWithDetails = async (id) => BlogPost.findOne({
   ],
 }); 
 const updatePost = (id, title, content) => BlogPost.update({ title, content }, { where: { id } });
-
-module.exports = { addPost, fetchPosts, findPostByIdWithDetails, updatePost };
+const deletePost = (id) => BlogPost.destroy({ where: { id } });
+module.exports = { addPost, fetchPosts, findPostByIdWithDetails, updatePost, deletePost };
