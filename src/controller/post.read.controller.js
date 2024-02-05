@@ -1,5 +1,5 @@
 const getUserFromToken = require('../util/getUserToken');
-const { postService } = require('../service');
+const { postService, postReadService } = require('../service');
 
 const updatePostById = async (req, res) => {
   try {
@@ -46,4 +46,14 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { updatePostById, deletePost };
+const searchPosts = async (req, res) => {
+  const { q } = req.query;
+  if (!q) {
+    const allPosts = await postService.fetchPosts();
+    return res.status(200).json(allPosts);
+  }
+  const posts = await postReadService.searchPosts(q);
+  return res.status(200).json(posts);
+};
+
+module.exports = { updatePostById, deletePost, searchPosts };
