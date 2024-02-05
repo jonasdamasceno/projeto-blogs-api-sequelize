@@ -4,29 +4,13 @@
 module.exports = {
   async up (queryInterface, Sequelize)  {
     await queryInterface.createTable('posts_categories', {
-      postId: {
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-        type: Sequelize.INTEGER,
-        field: "post_id",
-        references: {
-          model: 'blog_posts',
-          key: 'id'
-        },
-        onDelete: 'CASCADE',
+            post_id: {
+        type: Sequelize.INTEGER
       },
-      categoryId: {
-        allowNull: false,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-        field: "category_id",
-        references: {
-          key: 'id',
-          model: 'categories',
-        },
-        onDelete: 'CASCADE',
+      category_id: {
+        type: Sequelize.INTEGER
       },
+
     })
     /**
      * Add altering commands here.

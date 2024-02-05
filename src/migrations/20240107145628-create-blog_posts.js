@@ -11,31 +11,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       content: {
-        allowNull: false,
         type: Sequelize.STRING
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        field: "user_id",
-        references: {
-          model: 'users',
-          key: 'id'
-        },
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
+      user_id: {
+        type: Sequelize.INTEGER
       },
       published: {
-        type: Sequelize.DATE,
-        onUpdate: new Date()
+        type: Sequelize.DATE
       },
       updated: {
-        type: Sequelize.DATE,
-        onUpdate: new Date()
+        type: Sequelize.DATE
       },
     })
   },

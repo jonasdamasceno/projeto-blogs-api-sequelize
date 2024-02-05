@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: Sequelize.STRING
+      name: {type: Sequelize.STRING}
     })
     /**
      * Add altering commands here.
