@@ -14,8 +14,13 @@ id: {
       image: DataTypes.STRING
   }, {
     timestamps: false,
-    tableName: 'users',
     underscore: true
   });
+  User.associate = (models) => {
+        User.hasMany(models.BlogPost, {
+            foreignKey: 'userId',
+            as: 'user'
+        });
+    }
   return User
 }
