@@ -22,6 +22,17 @@ const addPost = async (req, res) => {
   }
 };
 
+const fetchPostsHandler = async (req, res) => {
+  try {
+    const fetchedPosts = await postService.fetchPosts();
+    return res.status(200).json(fetchedPosts);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   addPost,
+  fetchPostsHandler,
 };
