@@ -13,5 +13,6 @@ const findUserById = async (id) => {
   if (!user) return { status: 404, data: { message: 'User does not exist' } };
   return { status: 200, data: user };
 };
+const deleteUser = (id) => User.destroy({ where: { id } });
 
-module.exports = { createUser, findAllUsers, findUserById };
+module.exports = { createUser, findAllUsers, findUserById, deleteUser };

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { createUser } = require('../service/user.service');
 const { userService } = require('../service');
+const getUserFromToken = require('../util/getUserToken');
 
 const { JWT_SECRET } = process.env;
 
@@ -33,4 +34,16 @@ const findUserByIdController = async (req, res) => {
   return res.status(status).json(data);
 };
 
-module.exports = { createUserController, getUsersContreller, findUserByIdController };
+const deleteUser = async (req, res) => {
+  try {
+    const { authorization } = req.headers;
+    const id = await getUserFromToken(authorization);
+    await userService.deleteUser(id);
+    return res.status(204).end();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createUserController, getUsersContreller, findUserByIdController, deleteUser };
