@@ -1,46 +1,27 @@
-const { postTransformService } = require('../service');
-const getUserFromToken = require('../util/getUserToken');
+const jwt = require('jsonwebtoken');
+const { postService } = require('../service');
+
+const getUserId = async (authorization) => {
+  const token = authorization.split(' ')[1];
+  const secret = process.env.JWT_SECRET;
+  const decoded = jwt.verify(token, secret);
+
+  return decoded.data.userId;
+};
 
 const addPost = async (req, res) => {
   try {
-    const { authorization } = req.headers;
     const { title, content, categoryIds } = req.body;
-    const { userId } = await getUserFromToken(authorization);
-    const { status, data } = await postTransformService
-      .addPost(title, content, categoryIds, userId);
-    return res.status(status).json(data);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-const updatePost = async (req, res) => {
-  try {
-    const { id } = req.params;
     const { authorization } = req.headers;
-    const { title, content } = req.body;
-    const { userId } = await getUserFromToken(authorization);
-    const { status, data } = await postTransformService.updatePost(id, title, content, userId);
-    return res.status(status).json(data);
+    const userId = await getUserId(authorization);
+    const post = await postService.addPost(title, content, categoryIds, userId);
+    return res.status(201).json(post);
   } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-const deletePost = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { authorization } = req.headers;
-    const { userId } = await getUserFromToken(authorization);
-    const { status, data } = await postTransformService.deletePost(id, userId);
-    return res.status(status).json(data);
-  } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
 
 module.exports = {
   addPost,
-  updatePost,
-  deletePost,
 };

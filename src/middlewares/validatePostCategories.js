@@ -2,12 +2,11 @@ const { categoryService } = require('../service');
 
 const validatePost = async (req, res, next) => {
   const { title, content, categoryIds } = req.body;
-  
   if (!title || !content || !categoryIds) {
     return res.status(400).json({ message: 'Some required fields are missing' });
   }
 
-  const { data } = await categoryService.getCategories();
+  const { data } = await categoryService.getCategoryService();
 
   const isValidCategory = categoryIds.every((categoryId) => data
     .some((category) => category.id === categoryId));
