@@ -1,9 +1,18 @@
+const { categoryService } = require('../service');
+
 const validateCategoriesMiddleware = async (req, res, next) => {
-  const { categoryIds, content, title } = req.body;
-  if (!categoryIds) return res.status(400).json({ message: 'Some required fields are missing' });
-  if (!content || !title) {
-    return res
-      .status(400).json({ message: 'Some required fields are missing' }); 
+  const { title, content, categoryIds } = req.body;
+  if (!title || !content || !categoryIds) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  const { data } = await categoryService.getCategoryService();
+
+  const isValidCategory = categoryIds.every((categoryId) => data
+    .some((category) => category.id === categoryId));
+
+  if (!isValidCategory) {
+    return res.status(400).json({ message: 'one or more "categoryIds" not found' });
   }
 
   next();
