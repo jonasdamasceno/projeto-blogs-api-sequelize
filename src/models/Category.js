@@ -1,25 +1,12 @@
-
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define('Category', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
+    const Category = sequelize.define('Category', {
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+      name: DataTypes.STRING,
     },
-    name: {
-      allowNull: false,
-      type: DataTypes.STRING
+    {
+      timestamps: false,
+      underscored: true,
     },
-    timestamps: false,
-    tableName: 'categories',
-    underscore: true,
-  });
-  Category.associate = (models) => {
-    Category.hasMany = (models.PostCategory, {
-      foreignKey: 'categoryId',
-      as: 'category',
-    })
-  };
-  return Category
-}
+    )
+  return Category;
+};

@@ -8,14 +8,20 @@ id: {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      displayName:{type: DataTypes.STRING, field: "display_name" },
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      image: DataTypes.STRING
+      displayName: DataTypes.STRING,
+      email: DataTypes.INTEGER,
+      password: DataTypes.INTEGER,
+      image: DataTypes.INTEGER
   }, {
     timestamps: false,
     tableName: 'users',
     underscore: true
   });
+  User.associate = (models) => {
+    User.hasMany(models.BlogPost, {
+            foreignKey: 'userId',
+            as: 'user'
+        });
+  }
   return User
 }
