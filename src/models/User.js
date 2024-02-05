@@ -8,10 +8,10 @@ id: {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      displayName: DataTypes.STRING,
-      email: DataTypes.INTEGER,
-      password: DataTypes.INTEGER,
-      image: DataTypes.INTEGER
+      displayName:{type: DataTypes.STRING, field: "display_name" },
+      email: DataTypes.STRING,
+      password: DataTypes.STRING,
+      image: DataTypes.STRING
   }, {
     timestamps: false,
     tableName: 'users',
